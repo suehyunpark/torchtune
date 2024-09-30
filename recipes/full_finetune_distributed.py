@@ -494,7 +494,8 @@ class FullFinetuneRecipeDistributed(FTRecipeInterface):
         else:
             ds = config.instantiate(cfg_dataset, self._tokenizer)
             packed = cfg_dataset.get("packed", False)
-
+        print(ds[0])
+        
         # Instantiate collate_fn
         if "left_pad_sequence" in collate_fn:
             raise RuntimeError("left_pad_sequence collator is only for inference.")
@@ -517,6 +518,7 @@ class FullFinetuneRecipeDistributed(FTRecipeInterface):
             if not packed
             else padded_collate_packed,
         )
+        print(dataloader[0])
 
         if self._is_rank_zero:
             log.info("Dataset and Sampler are initialized.")
@@ -719,6 +721,7 @@ class FullFinetuneRecipeDistributed(FTRecipeInterface):
 
             self.epochs_run += 1
             self.save_checkpoint(epoch=curr_epoch)
+            break
 
         self._profiler.stop()
 
