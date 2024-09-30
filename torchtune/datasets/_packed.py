@@ -128,6 +128,8 @@ class PackedDataset(Dataset):
             # one of the two parameters
             seq_len = len(tokens)
             if seq_len > self.max_seq_len and not self.split_across_pack:
+                print(f"Skipping sample of length {seq_len} > {self.max_seq_len}...")
+                continue
                 raise ValueError(
                     f"Dataset sample is too long ({seq_len} > {self.max_seq_len}). "
                     "Please set `split_across_pack=True` or increase `max_seq_len`."
