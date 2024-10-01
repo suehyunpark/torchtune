@@ -518,7 +518,6 @@ class FullFinetuneRecipeDistributed(FTRecipeInterface):
             if not packed
             else padded_collate_packed,
         )
-        print(dataloader[0])
 
         if self._is_rank_zero:
             log.info("Dataset and Sampler are initialized.")
